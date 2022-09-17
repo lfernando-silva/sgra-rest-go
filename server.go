@@ -3,9 +3,10 @@ package main
 import (
 	"log"
 	"os"
-	"time"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/lfernando-silva/sgra-rest-go/routes/index"
+	"github.com/lfernando-silva/sgra-rest-go/database"
 )
 
 func getVar(envVarStr, def string) string{
@@ -24,18 +25,21 @@ func loadEnv() {
 	}
 }
 
+func loadDatabase(){
+	database.Init()
+	database.AutoMigrate()
+}
+
 func main() {
 	loadEnv()
+	loadDatabase()
 
 	server := gin.Default()
 	appPort := getVar("APP_PORT", ":5068")
 
-	server.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "OK",
-			"timestamp": time.Now().Unix(),
-		})
-	})
+	// /
+	index.HealthcheckRoutes(server)
+	index.SessionRoutes(server);
 
 	server.Run(appPort)
 }
