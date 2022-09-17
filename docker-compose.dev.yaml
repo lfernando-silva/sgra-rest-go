@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:14.5-alpine'
+    ports:
+      - 5440:5432
+    env_file:
+      - .env.development
+    volumes:
+      - /docker/postgresql/data/:/var/lib/postgresql/data/
