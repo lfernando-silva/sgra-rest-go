@@ -24,7 +24,6 @@ func Signup(c *gin.Context){
     return
   }
 
-  // Create book
   user := models.User{
 	Name: input.Name, 
 	Document: input.Document,

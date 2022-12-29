@@ -2,15 +2,10 @@ package index
 
 import "github.com/gin-gonic/gin";
 import (
-	"time"
+	"github.com/lfernando-silva/sgra-rest-go/controllers/index"
 )
 
 func HealthcheckRoutes(route *gin.Engine){
 	healthcheck := route.Group("/")
-	healthcheck.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "OK",
-			"timestamp": time.Now().Unix(),
-		})
-	})
+	healthcheck.GET("/", controllers.HealthCheck)
 }

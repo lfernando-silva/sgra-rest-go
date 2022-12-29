@@ -37,7 +37,6 @@ func main() {
 	server := gin.Default()
 	appPort := getVar("APP_PORT", ":5068")
 
-	// /
 	index.HealthcheckRoutes(server)
 	index.SessionRoutes(server);
 
